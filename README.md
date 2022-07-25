@@ -1,6 +1,7 @@
 # Rich Timestamp Bot
 A discord bot to help you create rich timestamps for discord.
 
+[Invite Link](https://discord.com/oauth2/authorize?client_id=1000892742165090384&scope=bot&permissions=0)
 
 ## Self Hosting
 ```sh
