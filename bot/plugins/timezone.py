@@ -134,7 +134,7 @@ class Timezone:
         try:
             pytz.timezone(self.region).localize(time)
         except pytz.UnknownTimeZoneError:
-            raise TimezoneError(f"`{self.region}` is not a valid timezone.")
+            raise TimezoneError(f"`{self.region}` is not a valid region.")
 
         timestamp = f"<t:{str(int(time.timestamp()))}:{self.format}>"
 
