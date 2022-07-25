@@ -1,0 +1,26 @@
+[tool.poetry]
+authors = ["Lunarmagpie <Bambolambo0@gmail.com>"]
+description = ""
+name = "bot"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+hikari = "^2.0.0-alpha.108"
+hikari-crescent = "^0.2.0"
+crescent-ext-docstrings = "^0.1.0"
+python = ">=3.8,<3.11"
+python-dotenv = "^0.20.0"
+types-python-dateutil = "^2.8.19"
+pytz = "^2022.1"
+
+[tool.poetry.dev-dependencies]
+black = "22.3.0"
+mypy = "0.961"
+
+[tool.mypy]
+namespace_packages = true
+strict = true
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

@@ -1,0 +1,13 @@
+from __future__ import annotations
+
+from datetime import datetime
+
+all_timezones: list[str]
+
+class Timezone:
+    def __init__(self, timezone: str) -> None: ...
+    def localize(self, dt: datetime) -> None: ...
+
+def timezone(timezone: str) -> Timezone: ...
+
+class UnknownTimeZoneError(Exception): ...
