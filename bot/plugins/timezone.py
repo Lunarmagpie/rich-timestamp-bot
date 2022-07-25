@@ -69,7 +69,7 @@ class Timezone:
     format = crescent.option(
         str,
         choices=[
-            ("Default", ""),
+            ("Default", "t"),
             ("Short Time", "t"),
             ("Long Time", "T"),
             ("Short Date", "d"),
