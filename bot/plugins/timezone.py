@@ -131,12 +131,13 @@ class Timezone:
             hour=hours,
             minute=minutes,
         )
+
         try:
-            pytz.timezone(self.region).localize(time)
+            adjusted_time = pytz.timezone(self.region).localize(time)
         except pytz.UnknownTimeZoneError:
             raise TimezoneError(f"`{self.region}` is not a valid region.")
 
-        timestamp = f"<t:{str(int(time.timestamp()))}:{self.format}>"
+        timestamp = f"<t:{str(int(adjusted_time.timestamp()))}:{self.format}>"
 
         await ctx.respond(f"{timestamp} `{timestamp}`", ephemeral=True)
 
