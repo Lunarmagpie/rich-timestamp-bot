@@ -1,5 +1,5 @@
 use pyo3::prelude::*;
-use rust_fuzzy_search::fuzzy_search_best_n;
+use rust_fuzzy_search;
 
 #[pyclass]
 struct StringSearcher {
@@ -15,7 +15,7 @@ impl StringSearcher {
 
     fn fuzzy_search(&self, s: &str, n: usize) -> Vec<String> {
         let words = self.words.iter().map(String::as_str).collect::<Vec<&str>>();
-        let results = fuzzy_search_best_n(s, words.as_slice(), n);
+        let results = rust_fuzzy_search::fuzzy_search_best_n(s, words.as_slice(), n);
         results.iter().map(|x| x.0.to_owned()).collect()
     }
 }

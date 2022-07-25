@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
+
 import crescent
 import hikari
+from crescent.ext import docstrings
+
 import pytz
 import rusty
-from crescent.ext import docstrings
 
 plugin = crescent.Plugin()
 
