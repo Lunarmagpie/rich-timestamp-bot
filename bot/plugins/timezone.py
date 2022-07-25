@@ -140,7 +140,11 @@ class Timezone:
 
         timestamp = f"<t:{str(int(adjusted_time.timestamp()))}:{self.format}>"
 
-        await ctx.respond(f"{timestamp} `{timestamp}`", ephemeral=True)
+        await ctx.respond(
+            "Use the unformatted timestamp in your message:\n"
+            f"{timestamp} `{timestamp}`",
+            ephemeral=True,
+        )
 
 
 @plugin.include
