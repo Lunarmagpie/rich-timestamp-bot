@@ -8,3 +8,7 @@ class Bot(crescent.Bot):
         super().__init__(token=config.CONFIG.token)
 
         self.plugins.load("bot.plugins.timezone")
+
+
+def run() -> None:
+    Bot().run()
