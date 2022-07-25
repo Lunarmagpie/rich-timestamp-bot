@@ -1,4 +1,5 @@
 import crescent
+from crescent.ext import docstrings
 import hikari
 
 from bot.config import CONFIG
@@ -7,6 +8,7 @@ plugin = crescent.Plugin()
 
 
 @plugin.include
+@docstrings.parse_doc
 @crescent.command
 async def info(ctx: crescent.Context) -> None:
     """
