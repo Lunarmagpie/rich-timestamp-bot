@@ -44,7 +44,7 @@ async def region_autocomplete(
 
 @plugin.include
 @docstrings.parse_doc
-@crescent.command(name="timezone")
+@crescent.command(name="rich-timestamp")
 class Timezone:
     """
     Turns a human readable timestamp into a rich timestamp.
