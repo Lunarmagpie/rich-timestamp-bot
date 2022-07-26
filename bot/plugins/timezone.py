@@ -8,6 +8,7 @@ from crescent.ext import docstrings
 
 import pytz
 import rusty
+from bot.util import TIME_FORMATS
 
 plugin = crescent.Plugin()
 
@@ -108,15 +109,7 @@ class Timezone:
     date = crescent.option(str, default=None)
     format = crescent.option(
         str,
-        choices=[
-            ("Short Time", "t"),
-            ("Long Time", "T"),
-            ("Short Date", "d"),
-            ("Long Date", "D"),
-            ("Short Date/Time", "f"),
-            ("Long Date/Time", "F"),
-            ("Relative Time", "R"),
-        ],
+        choices=TIME_FORMATS,
         default="t",
     )
 
