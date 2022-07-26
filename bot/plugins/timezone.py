@@ -59,12 +59,18 @@ def unwrap_date(date: str | None) -> tuple[int, int, int]:
                 "`date`."
             )
 
-    date_ints = list(map(safe_to_int, date.split("/")))
+    date_strs = date.split("/")
+    date_ints = list(map(safe_to_int, date_strs))
 
     if len(date_ints) == 2:
         month, day, year = *date_ints, now.year
     elif len(date_ints) == 3:
         month, day, year = date_ints
+
+        if len(date_strs[2]) == 2:
+            # user entered yy
+            year += 2000
+
     else:
         raise TimeoutError("Expected either mm/dd or mm/dd/yyyy for argument `date`")
 
