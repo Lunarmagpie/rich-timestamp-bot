@@ -1,6 +1,6 @@
 import crescent
-from crescent.ext import docstrings
 import hikari
+from crescent.ext import docstrings
 
 from bot.config import CONFIG
 
