@@ -14,4 +14,7 @@ FORMAT_EXAMPLES = "\n".join(
 @docstrings.parse_doc
 @crescent.command
 async def formats(ctx: crescent.Context) -> None:
+    """
+    View all the possible timestamp formats for /timestamp.
+    """
     await ctx.respond(FORMAT_EXAMPLES)
