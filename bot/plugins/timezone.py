@@ -44,16 +44,50 @@ async def region_autocomplete(
     ]
 
 
+def unwrap_date(date: str | None) -> tuple[int, int, int]:
+    now = datetime.utcnow()
+
+    if not date:
+        return now.month, now.day, now.year
+
+    def safe_to_int(s: str) -> int:
+        try:
+            return int(s)
+        except ValueError:
+            raise TimezoneError(
+                "Expected a number for month, day, and optionally year of argument"
+                "`date`."
+            )
+
+    date_ints = list(map(safe_to_int, date.split("/")))
+
+    if len(date_ints) == 2:
+        month, day, year = *date_ints, now.year
+    elif len(date_ints) == 3:
+        month, day, year = date_ints
+    else:
+        raise TimeoutError("Expected either mm/dd or mm/dd/yyyy for argument `date`")
+
+    if month < 1 or month > 12:
+        raise TimezoneError("The specified month must be between 1 and 12.")
+    if day < 1 or day > 31:
+        raise TimezoneError("The specified day must be between 1 and 31.")
+    if year < 0:
+        raise TimezoneError("The specified year must be greater than or equal to 0.")
+
+    return month, day, year
+
+
 @plugin.include
 @docstrings.parse_doc
-@crescent.command(name="rich-timestamp")
+@crescent.command(name="timestamp")
 class Timezone:
     """
-    Turns a human readable timestamp into a rich timestamp.
+    Generates a dynamic timestamp.
 
     Args:
         date:
-            The date in mm/dd/yyyy format.
+            The date in mm/dd/yyyy or mm/dd format.
         time:
             A human readable timestamp, such as "3:00pm" or in 24 hour time if you do
             not specify "am" or "pm".
@@ -81,25 +115,8 @@ class Timezone:
     )
 
     async def callback(self, ctx: crescent.Context) -> None:
-        if self.date:
-            try:
-                month, day, year = list(map(int, self.date.split("/")))
-            except ValueError:
-                raise TimezoneError(
-                    "Expected a number for month, day, and year of argument `date`."
-                )
 
-            if month < 1 or month > 12:
-                raise TimezoneError("The specified month must be between 1 and 12.")
-            if day < 1 or day > 31:
-                raise TimezoneError("The specified day must be between 1 and 31.")
-            if year < 0:
-                raise TimezoneError(
-                    "The specified year must be greater than or equal to 0."
-                )
-        else:
-            now = datetime.utcnow()
-            month, day, year = now.month, now.day, now.year
+        month, day, year = unwrap_date(self.date)
 
         hours_offset: int
         if "pm" in self.time:
